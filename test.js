@@ -1,23 +1,28 @@
+import React, { useState } from 'react';
 
-<!DOCTYPE html>
-<html>
-<body>
+import GoalList from './components/GoalList/GoalList';
+import NewGoal from './components/NewGoal/NewGoal';
+import './App.css';
 
-<h2>JavaScript Statements</h2>
+const App = () => {
+  const [courseGoals, setCourseGoals] = useState([
+    { id: 'cg1', text: 'Finish the Course' },
+    { id: 'cg2', text: 'Learn all about the Course Main Topic' },
+    { id: 'cg3', text: 'Help other students in the Course Q&A' }
+  ]);
 
-<p>A <b>JavaScript program</b> is a list of <b>statements</b> to be executed by a computer.</p>
+  const addNewGoalHandler = newGoal => {
+    // setCourseGoals(courseGoals.concat(newGoal));
+    setCourseGoals(prevCourseGoals => prevCourseGoals.concat(newGoal));
+  };
 
-<p id="demo"></p>
+  return (
+    <div className="course-goals">
+      <h2>Course Goals</h2>
+      <NewGoal onAddGoal={addNewGoalHandler} />
+      <GoalList goals={courseGoals} />
+    </div>
+  );
+};
 
-<script>
-var x, y, z;  // Declare 3 variables
-x = 5;    // Assign the value 5 to x
-y = 6;    // Assign the value 6 to y
-z = x + y;  // Assign the sum of x and y to z
-
-document.getElementById("demo").innerHTML =
-"The value of z is " + z + ".";
-</script>
-
-</body>
-</html>
+export default App;
